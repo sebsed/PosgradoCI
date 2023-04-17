@@ -1,62 +1,79 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+**Proyecto iniciado por:** Diego Prieto
+	https://github.com/elpriet8
+	
+**Mantenimiento y desarrollo de contenedores:** Sebastián Castañeda
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Resumen de Tecnología
+En esta sección se describe rápidamente la tecnología utilizada en el proyecto y se referencia a la documentación oficial para mayor información. También, se hace una descripción de la estructura de archivos.
 
-## About Laravel
+- Framework: Laravel versión 8.62.0
+	- PHP versión 7.3 o superior
+- Frontend: VueJs
+- BD: MySQL
+- Contenedores PHP y MySQL: Docker y docker-compose
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Estructura del proyecto
+Las carpetas importantes a modificar dentro del proyecto se encuentra en la ruta: `/public/storage`. En esta ruta, se pueden encontrar las carpetas donde se almacenan los archivos correspondientes a las imágenes o documentos a presentar en la página web.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+En la carpeta `/resources/js` se encuentra parte del código fuente de la página. Estos archivos pueden modificarse utilizando sintaxis de html.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalación en ambiente local con docker
+La ventaja de trabajar con contenedores es que se configuran las dependencias sin necesidad de instalarlas en el ambiente local.
+Como primer paso sería necesario instalar docker en la plataforma que se esté utilizando. 
+- Se recomienda utilizar [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
-## Learning Laravel
+Se recomienda clonar este repositorio para tener acceso a los archivos necesarios.
+Para poder levantar y modificar los contenedores se utilizan distintos comandos de Makefile:
+- `make build`: Construir o reconstruir el contenedor.
+- `make run`: Levantar el contenedor existente.
+- `make remove`: Finalizar la ejecución de los contenedores.
+- `make update-db`: Actualizar la base de datos con un mysql-dump nombrado `posgradoci_dump.sql`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Errores comunes
+#### Actualización de base de datos
+Para actualizar la base de datos, se recomienda tener una copia de la misma en un ambiente local y modificarla.
+Finalmente, hacer un mysql-dump de la base de datos en local y guardarlo en la carpeta base del proyecto con el nombre `posgradoci-dump.sql`.
+Finalmente, ejecutar el comando `make update-db`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### Comunicación entre contenedores
+Es posible que en un principio existan problemas de comunicación entre los contenedores `web` y `db`. Para asegurar que exista un enlace entre ambos es necesario seguir los siguientes pasos:
+1. Levantar contenedores.
+2. Ejecutar el comando `make update-db`.
+3. Inspeccionar el contenedor de la base de datos:
+	- Ejecutar el comando `docker ps` para obtener el id del contenedor `db`.
+	- Ejecutar el comando `docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <id-contenedor>`
+4. Poner la ip obtenida en la variable DB_HOST en el archivo `.env` para poder conectarlo con el contenedor web`.
 
-## Laravel Sponsors
+## Instalación en ambiente local sin docker
+Para poder ejecutar el proyecto de forma local se requieren instalar algunas dependencias primero:
+- Composer, administrador de paquetes de php,
+- NPM administrador de paquetes de node/js
+- PHP versión 7.3 o superior
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+>Para apoyo se proporcionan los siguientes sitios oficiales:
+>- https://getcomposer.org/
+>- https://nodejs.org/en/
 
-### Premium Partners
+### Ejecución del proyecto
+Una vez que se han instalado las dependencias, composer, npm y la versión correcta de php, se puede proceder a clonar el repositorio del proyecto e instalar las librerias correspondientes, los pasos son los siguientes:
+- Clonar repositorio
+- Instalar dependencias del proyecto
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+### Compilación de manera local
+Para compilar la página web de manera local y poder observar los cambios, es necesario contar con alguna herramienta que permita levantar un ambiente de servidor local. 
+	Se recomienda el uso de MAMP, ya sea en MacOS o en Windows.
 
-## Contributing
+Los comandos a ejecutar para compilar (con las dependencias propuestas en el resumen de tecnología), son: 
+```bash
+npm run dev 
+php artisan serve
+```
+El primer comando permite la compilación y el segundo comando levanta la página web
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Se recomienda instalar `yarn` para poder realizar la compilación de manera más ágil. En este caso, la compilación sería:
+```bash
+yarn dev
+php artisan serve
+```
+La instalación de `yarn` puede hacerse con `npm` o con `homebrew` (MacOS).
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'php artisan serve --host=0.0.0.0'
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    restart: unless-stopped
+    networks: 
+      - default
+    links:
+      - db
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'php artisan queue:work'
+    depends_on:
+      - db
+    networks: 
+      - default
+  db:
+    image: arm64v8/mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    volumes:
+      - data-vol:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+    networks: 
+      - default
+volumes:
+  data-vol: {}

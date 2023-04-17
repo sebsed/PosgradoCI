@@ -1,0 +1,151 @@
+.lean-create-btn {
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+    border-radius: 13px;
+    color: #0e76ff;
+    border: 1px solid #0e76ff;
+    transition: .3s all ease-in-out;
+    cursor: pointer;
+}
+
+.lean-create-btn:hover {
+    color: white;
+    background: #0e76ff;
+}
+
+.lean-delete-btn,
+.lean-edit-btn {
+    text-align: center;
+    border-radius: 13px;
+    margin-top: 2px;
+    font-size: 13px;
+    transition: .3s all ease-in-out;
+    padding: 3px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+}
+
+.lean-edit-btn {
+    color: #0e76ff;
+}
+
+.lean-delete-btn {
+    color: #e84043;
+}
+
+.lean-edit-btn:hover,
+.lean-delete-btn:hover {
+    color: black;
+}
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #00000070;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: .3s all ease-in-out;
+}
+
+.modal-bg-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 13px;
+    height: 89%;
+    width: 89%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    position: relative;
+    overflow: scroll;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 89%;
+    height: 5vh;
+    border-bottom: 3px solid #e84043;
+}
+
+.modal-header h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 89%;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+#modal-salute {
+    width: 100%;
+    text-align: left;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 1vh;
+}
+
+.modal-body p {
+    text-align: justify;
+    font-size: 18px;
+    color: #444;
+    font-weight: 400;
+}
+
+.modal-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 89%;
+    background: #ff6e3021;
+    border-radius: 13px;
+    padding-left: 3px;
+}
+
+.modal-footer label {
+    font-size: 15px;
+}
+
+@media only screen and (max-width: 500px) {
+    #modal-salute {
+        font-size: 18px;
+    }
+    .modal-header h2 {
+        font-size: 16px;
+    }
+    .modal-body p {
+        font-size: 15px;
+    }
+}

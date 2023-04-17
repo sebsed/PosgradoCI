@@ -1,0 +1,159 @@
+* {
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f8f8ff;
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+}
+
+li {
+    list-style: none;
+}
+
+.form-control {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.form-control-center {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.form-section-md {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 89%;
+    height: 100%;
+}
+
+.form-element {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.form-element-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.form-element-row-end {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 1vh;
+}
+
+.form-input-clean,
+.form-textarea-clean {
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    width: 100%;
+    transition: .3s all ease-in-out;
+    border: 1px solid white;
+    padding: 0;
+}
+
+.form-input-clean:hover,
+.form-textarea-clean:hover {
+    border: 1px solid #ddd;
+}
+
+.textarea-center {
+    height: 80%;
+}
+
+.form-section-paragraph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 89%;
+    margin: auto;
+    margin-bottom: 1vh;
+}
+
+.form-element-row-end label {
+    width: 25%;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.form-element-row-end input[type="text"],
+.form-element-row-end input[type="number"] {
+    flex-grow: 1;
+    border: .5px solid #ccc;
+    outline: none;
+}
+
+.lean-update-btn {
+    border: none;
+    background: rgb(14, 118, 255);
+    font-size: 15px;
+    color: white;
+    border-radius: 13px;
+    width: 34%;
+    height: 100%;
+    cursor: pointer;
+    transition: .3s all ease-in-out;
+}
+
+.lean-cancel-btn {
+    border: 1px solid #ddd;
+    background: #eee;
+    color: #d00206;
+    font-size: 15px;
+    border-radius: 13px;
+    width: 34%;
+    height: 100%;
+    cursor: pointer;
+    text-align: center;
+    transition: .3s all ease-in-out;
+}
+
+.lean-update-btn:hover {
+    background: rgb(43, 132, 247);
+}
+
+.lean-cancel-btn:hover {
+    background: #ddd;
+}
